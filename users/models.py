@@ -6,17 +6,13 @@ from django.contrib.auth.models import (
 
 class UserManager(BaseUserManager):
     def create_user(self, username, email, password=None):
-
         if not username:
-
             raise ValueError('Users must have an username')
-
 
         user = self.model(
             username = username, 
             email=email,
         )
-        
 
         user.set_password(password)
         user.save(using=self._db)
@@ -50,7 +46,7 @@ class User(AbstractBaseUser):
     objects = UserManager()
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['email',]
 
     def __str__(self):
         return self.username
