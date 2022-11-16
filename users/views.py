@@ -12,8 +12,6 @@ from rest_framework_simplejwt.views import (
 )
 from users.serializers import CustomTokenObtainPairSerializer, UserSerializer, UserProfileSerializer
 
-
-
 class UserView(APIView):
     def post(self, request):
         serializer = UserSerializer(data = request.data)
@@ -36,7 +34,6 @@ class mockView(APIView):
         user.is_admin = True
         user.save()
         return Response("get 요청")
-
 
 class FollowView(APIView):
     def post(self, request, user_id):
