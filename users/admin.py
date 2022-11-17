@@ -17,7 +17,7 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username',)
+        fields = "__all__"
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -59,7 +59,7 @@ class UserAdmin(BaseUserAdmin):
     list_display = ('id', 'username', 'email', 'is_admin')
     list_filter = ('is_admin',)
     fieldsets = (
-        (None, {'fields': ('username', 'password', 'email', 'followings')}),
+        (None, {'fields': ('username', 'password', 'email', 'followings', 'profile_image')}),
         ('Permissions', {'fields': ('is_admin',)}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
