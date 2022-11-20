@@ -43,6 +43,14 @@ INSTALLED_APPS = [
     "filter",
     "users",
     "post",
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'rest_framework.authtoken',
+    'django.contrib.sites',
 ]
 
 MIDDLEWARE = [
@@ -153,7 +161,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "ko-kr"
 
-TIME_ZONE = "Asia/Korea"
+TIME_ZONE = "Asia/Seoul"
 
 USE_I18N = True
 
@@ -175,3 +183,5 @@ MEDIA_URL = "/media/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = 'users.User'
+
+REST_USE_JWT = True

@@ -5,12 +5,13 @@ from rest_framework import permissions
 from rest_framework.generics import get_object_or_404
 from users import serializers
 from users.models import User
-
+import os
 from rest_framework_simplejwt.views import (
     TokenObtainPairView, 
     TokenRefreshView
 )
 from users.serializers import CustomTokenObtainPairSerializer, UserSerializer, UserProfileSerializer
+from django.shortcuts import redirect
 
 class UserView(APIView):
     def post(self, request):
@@ -53,3 +54,16 @@ class ProfileView(APIView):
         serializer = UserProfileSerializer(user)
 
         return Response(serializer.data)
+
+
+state = os.environ.get("STATE")
+BASE_URL = 'http://localhost:8000/'
+GOOGLE_CALLBACK_URI = BASE_URL + 'api/user/google/callback/'
+
+
+# 구글 로그인
+def google_login(request):
+    scope = "https://www.googleapis.com/auth/userinfo.email"
+    client_id = os.environ.get("SOCIAL_AUTH_GOOGLE_CLIENT_ID")
+    return redirect(f"https://accounts.google.com/o/oauth2/v2/auth?client_id={client_id}&response_type=code&redirect_uri={GOOGLE_CALLBACK_URI}&scope={scope}")
+
