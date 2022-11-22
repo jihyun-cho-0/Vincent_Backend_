@@ -74,6 +74,7 @@ class FilterCommentView (APIView):
     def get(self, request, filter_id):
         filter_post = get_object_or_404(FilterImage, id=filter_id)
         comments = filter_post.filter_comment_likes.all()
+        # filtercomment table의 related name
         slz = FilterCommentSerializer(comments, many=True)
         return Response(slz.data)
 
