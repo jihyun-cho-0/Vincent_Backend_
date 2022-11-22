@@ -11,7 +11,7 @@ class MainView(ListAPIView):
     queryset = Post.objects.all()
 
     def get(self, request):
-        sorting_val = self.request.Get.get('sort')
+        sorting_val = self.request.GET.get('sort')
         # get 파라미터 내용중 sort 문자열의 내용을 가져옴
         if sorting_val == 'recreate':
             self.pagination_class = Cursor_reverse_created
