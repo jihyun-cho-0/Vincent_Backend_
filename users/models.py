@@ -36,10 +36,10 @@ class User(AbstractBaseUser):
         unique=True,
     )
 
-    followings = models.ManyToManyField('self',symmetrical=False, related_name="followers", blank=True)
+    followings = models.ManyToManyField('self', symmetrical=False, related_name="followers", blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
-    profile_image = models.ImageField(upload_to="profile/", blank=True, null=True)
+    profile_image = models.ImageField(upload_to="profile/", blank=True, null=True)  # input이미지와 구분을 위해 profile_image로 변경
     email = models.EmailField(blank=True, null=True)
     
 

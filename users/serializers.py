@@ -7,16 +7,18 @@ from users.models import User
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
-    followers = serializers.StringRelatedField(many=True)
-    followings = serializers.StringRelatedField(many=True)
-
-    # post_user = PostListSerializer(many=True)
-    # post_likes = PostListSerializer(many=True)
+    # followers = serializers.StringRelatedField(many=True)
+    # followings = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = User
-        fields = ("id","followings", "followers", "post_user", "post_likes")
+        fields = ("username", "email", "profile_image", "is_active", "followings")
 
+
+class UserProfileEditSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("username", "email", "profile_image")
 
 
 class UserSerializer(serializers.ModelSerializer):
