@@ -10,7 +10,6 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView, 
     TokenRefreshView
 )
-from users.serializers import CustomTokenObtainPairSerializer, UserSerializer, UserProfileSerializer
 from django.shortcuts import redirect
 import requests
 from allauth.socialaccount.models import SocialAccount
@@ -19,6 +18,9 @@ from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from allauth.socialaccount.providers.google import views as google_view
 from dj_rest_auth.registration.views import SocialLoginView
 from json import JSONDecodeError
+from users.serializers import CustomTokenObtainPairSerializer, UserSerializer, UserProfileSerializer, UserProfileEditSerializer
+
+
 class UserView(APIView):
     def post(self, request):
         serializer = UserSerializer(data = request.data)
@@ -36,7 +38,6 @@ class CustomTokenObtainPairView(TokenObtainPairView):
 class mockView(APIView):
     permission_classes = [permissions.IsAuthenticated]
     def get(self, request):
-        print(request.user)
         user = request.user
         user.is_admin = True
         user.save()
@@ -54,12 +55,13 @@ class FollowView(APIView):
             return Response("좋아요 취소 했습니다.", status=status.HTTP_200_OK)
 
 
-class ProfileView(APIView):
-    def get(self, request, username):
-        user = get_object_or_404(User, id=username)
-        serializer = UserProfileSerializer(user)
 
+class ProfileView(APIView):  # 프로필 화면 뷰
+    def get(self, request, username):
+        user = get_object_or_404(User, username=username)
+        serializer = UserProfileSerializer(user)
         return Response(serializer.data)
+
 
 
 state = os.environ.get("STATE")
@@ -157,3 +159,17 @@ class GoogleLogin(SocialLoginView):
     adapter_class = google_view.GoogleOAuth2Adapter
     callback_url = GOOGLE_CALLBACK_URI
     client_class = OAuth2Client
+
+class ProfileEditView(APIView): # 프로필 화면 편집 뷰
+    def put(self, request, username):
+        user = get_object_or_404(User, username=username)
+        if request.user == user:
+            serializer = UserProfileEditSerializer(user, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            else:
+                return Response(serializer.errors)
+        else:
+            return Response("권한이 없습니다.")
+

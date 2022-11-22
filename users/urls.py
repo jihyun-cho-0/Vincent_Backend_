@@ -14,4 +14,6 @@ urlpatterns = [
     path('google/login', views.google_login, name='google_login'),
     path('google/callback/', views.google_callback, name='google_callback'),
     path('google/login/finish/', views.GoogleLogin.as_view(), name='google_login_todjango'),
+    path('<str:username>/', views.ProfileView.as_view(), name='profile_view'),
+    path('<str:username>/edit/', views.ProfileEditView.as_view(), name='profile_edit'),
 ]
