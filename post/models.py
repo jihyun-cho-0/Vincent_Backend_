@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import User
+from filter.models import FilterImage
 
 
 class Post(models.Model):
@@ -10,6 +11,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     likes = models.ManyToManyField(User, related_name="post_likes", blank=True)
+    used_filter = models.ForeignKey(FilterImage, blank=True, null=True, on_delete=models.CASCADE, related_name='post_filter')
 
     def __str__(self):
         return str(self.title)

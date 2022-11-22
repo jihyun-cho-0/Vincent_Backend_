@@ -43,6 +43,7 @@ class PostListSerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()
     comments_count = serializers.SerializerMethodField()
+    filter = serializers.SerializerMethodField()
 
     def get_user(self, obj):
         return obj.user.username
@@ -52,6 +53,9 @@ class PostListSerializer(serializers.ModelSerializer):
 
     def get_comments_count(self, obj):
         return obj.comment_post.count()
+    
+    def get_filter(self, obj):
+        return obj.post_filter.filter_name
     class Meta:
         model = Post
-        fields = ("pk", "title", "post_image", "updated_at", "user", "likes_count", "comments_count")
+        fields = ("pk", "title", "post_image", "updated_at", "user", "likes_count", "comments_count", "filter")
