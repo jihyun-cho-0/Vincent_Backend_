@@ -1,10 +1,18 @@
 from rest_framework.views import APIView
-from rest_framework import status, permissions
-from rest_framework.response import Response
+from rest_framework.generics import ListAPIView
+from main.paginations import Cursor_created, Cursor_reverse_created
+from post.serializer import PostListSerializer, PostSerializer
+from post.models import Post, Comment
 
 # Create your views here.
-class MainView(APIView):
+class MainView(ListAPIView):
+    pagination_class = Cursor_created
+    serializer_class = PostListSerializer
+    queryset = Post.objects.all()
+
     def get(self, request):
+        if self.request.Get.get(''):
+            pass
         return
     
     def post(self, reqeust):
