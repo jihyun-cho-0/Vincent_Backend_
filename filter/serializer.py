@@ -7,6 +7,11 @@ class FilternameSerializer(serializers.ModelSerializer):
         model = FilterImage
         fields = ("filter_name",)
 
+class FiltercreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FilterImage
+        fields = "__all__"
+
 class FilterallSerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()
