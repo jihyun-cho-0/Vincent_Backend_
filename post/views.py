@@ -6,7 +6,6 @@ from post.models import Post
 from rest_framework.generics import get_object_or_404
 
 class ArticlesView(APIView):
-
     def get(self, request):
         post = Post.objects.all()
         serializer = PostListSerializer(post, many=True)
@@ -62,7 +61,6 @@ class CommentView (APIView):
             return Response(serializer.errors)
 
 class CommentDetailView (APIView):
-    
     def put(self, request, post_id, coment_id):
         comment = get_object_or_404(Post, id=coment_id)
         if request.user == comment.user:
