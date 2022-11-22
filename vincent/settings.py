@@ -38,11 +38,20 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'django.contrib.sites',   
     "rest_framework",
     'rest_framework_simplejwt',
     "filter",
     "users",
     "post",
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'rest_framework.authtoken',
+
 ]
 
 MIDDLEWARE = [
@@ -172,6 +181,10 @@ MEDIA_URL = "/media/"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
+SITE_ID = 1
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = 'users.User'
+
+REST_USE_JWT = True
