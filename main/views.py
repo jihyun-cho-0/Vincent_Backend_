@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView
-from main.paginations import Cursor_created, Cursor_reverse_created, Cursor_likes
+from main.paginations import Cursor_created, Cursor_reverse_created, Cursor_likes, Page_created
 from post.serializer import PostListSerializer, PostSerializer
 from post.models import Post, Comment
 
@@ -15,7 +15,7 @@ class MainView(ListAPIView):
         # get 파라미터 내용중 sort 문자열의 내용을 가져옴
         if sorting_val == 'recreate':
             self.pagination_class = Cursor_reverse_created
-        elif sorting_val == 'like':
+        if sorting_val == 'like':
             self.pagination_class = Cursor_likes
         pages = self.paginate_queryset(self.get_queryset())
         # pages 라는 변수에 get_queryset을 이용하여 queryset을 가져오고 pagination에 넣어줌
