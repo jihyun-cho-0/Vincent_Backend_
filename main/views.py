@@ -40,7 +40,7 @@ class ConvertImageView(APIView):
             if slz.data['user_filter']:
                 # user_filter가 존재 하면 실행
                 change_image(1, slz.data['temp_image'], slz.data['user_filter'])
-            else:
+            elif slz.data['filter']:
                 # user_filter가 아닌 기존 filter를 사용하면 실행
                 stored_filter = FilterImage.objects.get(id=slz.data['filter']).filter_image
                 # filter의 id 값으로 전달될 예정이기 때문에 이미지를 가져와줌
