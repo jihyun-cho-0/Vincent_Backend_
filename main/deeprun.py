@@ -75,7 +75,7 @@ def transfer_style(content_image, style_image, model_path):
     print("Stylizing completed...")
     return stylized_image
 
-def change_image(image_path, style_path):
+def change_image(num, image_path, style_path):
     import matplotlib.pylab as plt
     import os
 
@@ -83,14 +83,26 @@ def change_image(image_path, style_path):
     relative_path = "model"
     full_path = os.path.join(absolute_path, relative_path)
     model_path = full_path
+    # 저장된 model위치 찾기
     
-    absolut_temp = os.path.abspath('temp')
-    absolut_filter = os.path.abspath('user_temp_filter')
-    
-    image_full_path = os.path.join(absolut_temp, image_path.split('/')[-1])
-    style_full_path = os.path.join(absolut_filter, style_path.split('/')[-1])
+    absolut_media_path = os.path.abspath('media/temp')
+    image_full_path = os.path.join(absolut_media_path, image_path.split('/')[-1])
+    # media/temp의 경로와 파일의 경로를 합쳐줌
 
-    img = transfer_style(image_full_path, style_full_path, model_path)
-    plt.imsave(image_path, img)
+    if num == 1:
+        # user filter를 사용할 때
+        absolut_filter_path = os.path.abspath('media/user_temp_filter')
+        style_full_path = os.path.join(absolut_filter_path, style_path.split('/')[-1])
+        img = transfer_style(image_full_path, style_full_path, model_path)
+        plt.imsave(image_full_path, img)
+    else:
+        # 기존 filter를 사용할 때
+        absolut_filter_path = os.path.abspath('media/filter')
+        style_path = str(style_path)
+        # 기존 필터를 사용하면 이미지가 str 값이 아닌 imagefield 여서 str로 바꾼 후
+        # 이름값을 출력해야 함
+        style_full_path = os.path.join(absolut_filter_path, style_path.split('/')[-1])
+        img = transfer_style(image_full_path, style_full_path, model_path)
+        plt.imsave(image_full_path, img)
 
 # change_image("C:/Users/rjgjf/Desktop/cat1.png", "C:/Users/rjgjf/Desktop/testtest.jpg")

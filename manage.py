@@ -19,7 +19,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
     dotenv.read_dotenv()
     main()
 

@@ -22,5 +22,9 @@ class Cursor_likes(CursorPagination):
     max_page_size = 50
     page_query_param = 'p'
 
+class Cursor_likes_modal(CursorPagination):
+    page_size = 5
+    ordering = '-likes'
+
 class Page_created(PageNumberPagination):
     page_size = 2
