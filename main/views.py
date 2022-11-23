@@ -10,6 +10,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from filter.models import FilterImage
 from rest_framework import status
+from django.db.models import Count
 
 
 # Create your views here.
@@ -17,7 +18,9 @@ class MainView(ListAPIView):
     pagination_class = Cursor_created
     # pagination_class = Page_created
     serializer_class = PostListSerializer
-    queryset = Post.objects.all()
+    # queryset = Post.objects.all()
+    queryset = Post.objects.annotate(count=Count('likes')).order_by('-count')
+
 
     def get(self, request):
         sorting_val = self.request.GET.get('sort')
@@ -26,10 +29,16 @@ class MainView(ListAPIView):
             self.pagination_class = Cursor_reverse_created
         if sorting_val == 'like':
             self.pagination_class = Cursor_likes
+
         pages = self.paginate_queryset(self.get_queryset())
         # pages 라는 변수에 get_queryset을 이용하여 queryset을 가져오고 pagination에 넣어줌
-        slz = self.get_serializer(pages, many=True)
-        return self.get_paginated_response(slz.data, status=status.HTTP_200_OK)
+        # pagination이 실행될때 필요한 구문, 하지만 안 씀
+
+        page = self.get_queryset()
+        # 23 번째 줄의 쿼리셋 호출
+
+        slz = self.get_serializer(page, many=True)
+        return self.get_paginated_response(slz.data)
 
 class ConvertImageView(APIView):
 
