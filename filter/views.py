@@ -29,13 +29,13 @@ class FilterView(ListAPIView):
         pages = self.paginate_queryset(self.get_queryset())
         # pages 라는 변수에 get_queryset을 이용하여 queryset을 가져오고 pagination에 넣어줌
         slz = self.get_serializer(pages, many=True)
-        return self.get_paginated_response(slz.data, status=status.HTTP_200_OK)
+        return self.get_paginated_response(slz.data)
     
     def post(self, request, format=None):
         slz = FiltercreateSerializer(data=request.data)
         if slz.is_valid():
             slz.save(user=request.user)
-            return Response(slz.data, stats=status.HTTP_200_OK)
+            return Response(slz.data, status=status.HTTP_200_OK)
         else:
             return Response(slz.errors, status=status.HTTP_400_BAD_REQUEST)
 

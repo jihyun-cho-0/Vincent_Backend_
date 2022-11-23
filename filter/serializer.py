@@ -10,7 +10,7 @@ class FilternameSerializer(serializers.ModelSerializer):
 class FiltercreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = FilterImage
-        fields = "__all__"
+        fields = ("filter_name", "filter_image", "content",)
 
 class FilterallSerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField()
