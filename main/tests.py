@@ -6,10 +6,10 @@ import os
 # print(os.path.abspath('.'))
 
 absolute_path = os.path.dirname(__file__)
-absolute_temp = os.path.dirname('main')
 temp = '/media/temp/11_fg7op5y.png'
 temp2 = temp.split('/')[-1]
+absolut_temp = os.path.abspath('media/temp')
+print(absolut_temp)
 
-print(os.path.abspath(''))
 # full_path = os.path.join(absolute_path, temp2)
 # print(full_path)
