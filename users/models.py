@@ -42,7 +42,7 @@ class User(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     image = models.ImageField(upload_to="profile/", blank=True, null=True)
-    email = models.EmailField(blank=True, null=True)
+    email = models.EmailField()
     
 
     objects = UserManager()
