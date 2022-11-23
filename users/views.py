@@ -21,6 +21,7 @@ from json import JSONDecodeError
 from users.serializers import CustomTokenObtainPairSerializer, UserSerializer, UserProfileSerializer, UserProfileEditSerializer
 
 
+
 class UserView(APIView):
     def post(self, request):
         serializer = UserSerializer(data = request.data)
@@ -66,18 +67,20 @@ class ProfileView(APIView):  # 프로필 화면 뷰
 
 state = os.environ.get("STATE")
 BASE_URL = 'http://localhost:8000/'
-GOOGLE_CALLBACK_URI = BASE_URL + '/users/api/users/callback/'
+GOOGLE_CALLBACK_URI = BASE_URL + 'users/api/user/google/login/callback/'
 
 
 # 구글 로그인
 def google_login(request):
     scope = "https://www.googleapis.com/auth/userinfo.email"
     client_id = os.environ.get("SOCIAL_AUTH_GOOGLE_CLIENT_ID")
+    print(client_id)
     return redirect(f"https://accounts.google.com/o/oauth2/v2/auth?client_id={client_id}&response_type=code&redirect_uri={GOOGLE_CALLBACK_URI}&scope={scope}")
 
 def google_callback(request):
     client_id = os.environ.get("SOCIAL_AUTH_GOOGLE_CLIENT_ID")
     client_secret = os.environ.get("SOCIAL_AUTH_GOOGLE_SECRET")
+    print(client_secret)
     code = request.GET.get('code')
 
     # 1. 받은 코드로 구글에 access token 요청
@@ -150,15 +153,16 @@ def google_callback(request):
         accept_json = accept.json()
         accept_json.pop('user', None)
         return JsonResponse(accept_json)
-
+        
     except SocialAccount.DoesNotExist:
+    	# User는 있는데 SocialAccount가 없을 때 (=일반회원으로 가입된 이메일일때)
         return JsonResponse({'err_msg': 'email exists but not social user'}, status=status.HTTP_400_BAD_REQUEST)
-
 
 class GoogleLogin(SocialLoginView):
     adapter_class = google_view.GoogleOAuth2Adapter
     callback_url = GOOGLE_CALLBACK_URI
     client_class = OAuth2Client
+
 
 class ProfileEditView(APIView): # 프로필 화면 편집 뷰
     def put(self, request, username):
