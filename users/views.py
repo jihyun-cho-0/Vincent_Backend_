@@ -64,6 +64,19 @@ class ProfileView(APIView):  # 프로필 화면 뷰
         return Response(serializer.data)
 
 
+class ProfileEditView(APIView): # 프로필 화면 편집 뷰
+    def put(self, request, username):
+        user = get_object_or_404(User, username=username)
+        if request.user == user:
+            serializer = UserProfileEditSerializer(user, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            else:
+                return Response(serializer.errors)
+        else:
+            return Response("권한이 없습니다.")
+
 
 state = os.environ.get("STATE")
 BASE_URL = 'http://localhost:8000/'
@@ -163,17 +176,4 @@ class GoogleLogin(SocialLoginView):
     callback_url = GOOGLE_CALLBACK_URI
     client_class = OAuth2Client
 
-
-class ProfileEditView(APIView): # 프로필 화면 편집 뷰
-    def put(self, request, username):
-        user = get_object_or_404(User, username=username)
-        if request.user == user:
-            serializer = UserProfileEditSerializer(user, data=request.data)
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data)
-            else:
-                return Response(serializer.errors)
-        else:
-            return Response("권한이 없습니다.")
 
