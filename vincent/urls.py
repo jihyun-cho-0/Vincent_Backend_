@@ -21,8 +21,10 @@ from django.conf import settings
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("post/", include('post.urls')),
-    path("users/", include('users.urls')),
     path("filter/", include('filter.urls')),
+    path('api/user/', include('allauth.urls')),
+    path('users/', include('users.urls')),
+    path('api/user/', include('dj_rest_auth.urls')),
     path("main/", include('main.urls')),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
