@@ -23,4 +23,4 @@ class Cursor_likes(CursorPagination):
     page_query_param = 'p'
 
 class Page_created(PageNumberPagination):
-    page_size = 4
+    page_size = 2

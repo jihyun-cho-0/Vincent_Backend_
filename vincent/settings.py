@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "filter",
     "users",
     "post",
+    "main",
     'dj_rest_auth',
     'dj_rest_auth.registration',
     'allauth',
