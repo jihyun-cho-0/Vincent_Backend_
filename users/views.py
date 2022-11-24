@@ -75,7 +75,7 @@ GOOGLE_CALLBACK_URI = BASE_URL + 'users/google/callback/'
 def google_login(request):
     scope = "https://www.googleapis.com/auth/userinfo.email"
     client_id = os.environ.get("SOCIAL_AUTH_GOOGLE_CLIENT_ID")
-    return redirect(f"https://users.google.com/o/oauth2/v2/auth?client_id={client_id}&response_type=code&redirect_uri={GOOGLE_CALLBACK_URI}&scope={scope}")
+    return redirect(f"https://accounts.google.com/o/oauth2/v2/auth?client_id={client_id}&response_type=code&redirect_uri={GOOGLE_CALLBACK_URI}&scope={scope}")
 
 def google_callback(request):
     client_id = os.environ.get("SOCIAL_AUTH_GOOGLE_CLIENT_ID")
@@ -138,6 +138,9 @@ class GoogleLogin(SocialLoginView):
     adapter_class = google_view.GoogleOAuth2Adapter
     callback_url = GOOGLE_CALLBACK_URI
     client_class = OAuth2Client
+
+
+
 
 
 

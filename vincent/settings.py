@@ -69,7 +69,6 @@ MIDDLEWARE = [
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [ # 기본적인 view 접근 권한 지정
         'rest_framework.permissions.AllowAny',
-        'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [ # session 혹은 token을 인증 할 클래스 설정
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -191,6 +190,7 @@ SITE_ID = 1
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = 'users.User'
+
 
 REST_USE_JWT = True
 
