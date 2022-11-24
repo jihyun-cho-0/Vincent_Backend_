@@ -10,6 +10,8 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from filter.models import FilterImage
 from rest_framework import status
+from django.db.models import Count
+from users.models import User
 
 
 # Create your views here.
@@ -17,9 +19,20 @@ class MainView(ListAPIView):
     pagination_class = Cursor_created
     # pagination_class = Page_created
     serializer_class = PostListSerializer
-    queryset = Post.objects.all()
+    # queryset = Post.objects.all()
+    queryset = Post.objects.annotate(count=Count('likes')).order_by('-count')
+
+    # def get_queryset(self) :
+    #     user = self.request.user
+    #     return arduino.objects.filter(name=user)
+    
+    def get_queryset(self) :
+        queryset = Post.objects.annotate(count=Count('likes')).order_by('-count')
+        print(11111,queryset)
+        return queryset
 
     def get(self, request):
+        print(self.queryset)
         sorting_val = self.request.GET.get('sort')
         # get 파라미터 내용중 sort 문자열의 내용을 가져옴
         if sorting_val == 'recreate':
@@ -27,14 +40,17 @@ class MainView(ListAPIView):
         if sorting_val == 'like':
             self.pagination_class = Cursor_likes
         pages = self.paginate_queryset(self.get_queryset())
+        print(222222,pages)
         # pages 라는 변수에 get_queryset을 이용하여 queryset을 가져오고 pagination에 넣어줌
         slz = self.get_serializer(pages, many=True)
-        return self.get_paginated_response(slz.data, status=status.HTTP_200_OK)
+        return self.get_paginated_response(slz.data)
 
 class ConvertImageView(APIView):
 
     def post(self, request):
+        print(request.data)
         slz = TempImageSerializer(data=request.data)
+    
         if slz.is_valid():
             slz.save()
             if slz.data['user_filter']:
