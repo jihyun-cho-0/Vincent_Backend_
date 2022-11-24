@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView
-from main.paginations import Cursor_created, Cursor_reverse_created, Cursor_likes, Page_created
+from main.paginations import post_page, filter_modal_page
 from post.serializer import PostListSerializer, PostSerializer
 from post.models import Post, Comment
 from main.deeprun import change_image
@@ -15,25 +15,23 @@ from django.db.models import Count
 
 # Create your views here.
 class MainView(ListAPIView):
-    # pagination_class = Cursor_created
-    pagination_class = Page_created
+    pagination_class = post_page
     serializer_class = PostListSerializer
-    queryset = Post.objects.all()
+    queryset = Post.objects.all().order_by('-created_at')
+    # 초기는 최신순 정렬
     # queryset = Post.objects.annotate(count=Count('likes')).order_by('-count')
-
 
     def get(self, request):
         sorting_val = self.request.GET.get('sort')
         # get 파라미터 내용중 sort 문자열의 내용을 가져옴
         if sorting_val == 'recreate':
-            self.pagination_class = Cursor_reverse_created
-        if sorting_val == 'like':
-            self.pagination_class = Cursor_likes
-        
-        self.queryset = Post.objects.annotate(count=Count('likes')).order_by('-count')
-        pages = self.paginate_queryset(self.get_queryset())
+            self.queryset = Post.objects.all().order_by('created_at')
 
-        print(pages, '#####33')
+        if sorting_val == 'like':
+            self.queryset = Post.objects.annotate(count=Count('likes')).order_by('-count')
+            # 좋아요 순으로 정렬
+        
+        pages = self.paginate_queryset(self.get_queryset())
         # pages 라는 변수에 get_queryset을 이용하여 queryset을 가져오고 pagination에 넣어줌
         # pagination이 실행될때 필요한 구문, 하지만 안 씀
 
