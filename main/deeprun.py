@@ -53,6 +53,7 @@ def transfer_style(content_image, style_image, model_path):
     # 4차원을 3차원으로 바꿔줬음
     # print(content_image.shape, '###########')
     style_image = style_image.astype(np.float32)[np.newaxis, ...] / 255.
+    style_image = tf.convert_to_tensor(style_image[:,:,:,:3])
 
     # Optionally resize the images. It is recommended that the style image is about
     # 256 pixels (this size was used when training the style transfer network).
