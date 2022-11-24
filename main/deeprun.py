@@ -26,6 +26,7 @@ def transfer_style(content_image, style_image, model_path):
     import numpy as np
     import tensorflow as tf
     import tensorflow_hub as hub
+    import cv2
 
     """
     :param content_image: path of the content image
@@ -42,6 +43,28 @@ def transfer_style(content_image, style_image, model_path):
 
     print("Loading images...")
     # Load content and style images
+    # uni_content_image = np.fromfile(content_image, np.uint8)
+    # uni_style_image = np.fromfile(style_image, np.uint8)
+    
+    # open cv 한글 처리
+    # temp_content_image = np.fromfile(content_image, np.uint8)
+    # temp_style_image = np.fromfile(content_image, np.uint8)
+    
+    # content_image = cv2.imdecode(temp_content_image, cv2.IMREAD_UNCHANGED)
+    # style_image = cv2.imdecode(temp_style_image, cv2.IMREAD_UNCHANGED)
+    # 한글 처리 종료
+
+    # 한글 테스트 함수
+    # def hangultest(file_path):
+    #     f = open(file_path.encode("utf-8"),"rb")
+    #     bytes = bytearray(f.read())
+    #     npArr = np.asarray(bytes, dtype=np.uint8)
+
+    #     return cv2.imdecode(npArr, cv2.IMREAD_UNCHANGED)
+    
+    # content_image = hangultest(content_image)
+    # style_image = hangultest(style_image)
+
     content_image = plt.imread(content_image)
     style_image = plt.imread(style_image)
 
