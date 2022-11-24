@@ -2,7 +2,7 @@ from django.db import models
 from filter.models import FilterImage
 import os
 from django.conf import settings
-
+from main.utils import rename_imagefile_to_uuid
 
 class TempImage(models.Model):
     def delete(self, *args, **kargs):
@@ -10,7 +10,7 @@ class TempImage(models.Model):
             os.remove(os.path.join(settings.MEDIA_ROOT, self.upload_files.path))
         super(TempImage, self).delete(*args, **kargs)
     
-    temp_image = models.ImageField(blank=False, upload_to='temp')
+    temp_image = models.ImageField(blank=False, upload_to=rename_imagefile_to_uuid)
     # 원본 이미지
     filter = models.ForeignKey(FilterImage, blank=True, null=True, on_delete=models.CASCADE, related_name='temp_filter')
     # 서버에 저장된 filter_image의 id

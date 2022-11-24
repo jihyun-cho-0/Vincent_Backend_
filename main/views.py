@@ -41,11 +41,14 @@ class MainView(ListAPIView):
 class ConvertImageView(APIView):
 
     def post(self, request):
+        # <QueryDict: {'filter': ['7'], 'temp_image': [<InMemoryUploadedFile: 한글.png (image/png)>]}>
         slz = TempImageSerializer(data=request.data)
         if slz.is_valid():
             slz.save()
+            # {'id': 22, 'temp_image': '/media/temp/78fda41248614e33b397d2a6b953bca5_TempImage_object_None.png', 'user_filter': None, 'filter': 7}
             if slz.data['user_filter']:
                 # user_filter가 존재 하면 실행
+                # 방금 저장한 모델 pk 값 가져와서 temp_image 값 가져와서 넣어주기
                 change_image(1, slz.data['temp_image'], slz.data['user_filter'])
             elif slz.data['filter']:
                 # user_filter가 아닌 기존 filter를 사용하면 실행

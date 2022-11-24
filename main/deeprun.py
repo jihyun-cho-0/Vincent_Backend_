@@ -65,8 +65,9 @@ def transfer_style(content_image, style_image, model_path):
     # content_image = hangultest(content_image)
     # style_image = hangultest(style_image)
 
-    content_image = plt.imread(content_image)
-    style_image = plt.imread(style_image)
+
+    content_image = cv2.imread(content_image)
+    style_image = cv2.imread(style_image)
 
     print("Resizing and Normalizing images...")
     # Convert to float32 numpy array, add batch dimension, and normalize to range [0, 1]. Example using numpy:
