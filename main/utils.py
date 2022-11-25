@@ -13,6 +13,8 @@ def rename_imagefile_to_uuid(instance, filename):
         
         return os.path.join(upload_to, filename)
 
+
+
 def rename_userimagefile_to_uuid(instance, filename):
         upload_to = f'user_temp_filter/'
         ext = filename.split('.')[-1]
@@ -22,5 +24,5 @@ def rename_userimagefile_to_uuid(instance, filename):
             filename = '{}_{}.{}'.format(uuid, instance, ext)
         else:
             filename = '{}.{}'.format(uuid, ext)
-        
+
         return os.path.join(upload_to, filename)
