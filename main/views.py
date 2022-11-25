@@ -14,7 +14,7 @@ from django.db.models import Count
 from users.models import User
 
 
-# Create your views here.
+
 class MainView(ListAPIView):
     pagination_class = Cursor_created
     # pagination_class = Page_created
