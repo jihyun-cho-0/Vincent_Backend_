@@ -26,6 +26,7 @@ def transfer_style(content_image, style_image, model_path):
     import numpy as np
     import tensorflow as tf
     import tensorflow_hub as hub
+    import cv2
 
     """
     :param content_image: path of the content image
@@ -41,9 +42,9 @@ def transfer_style(content_image, style_image, model_path):
     """
 
     print("Loading images...")
-    # Load content and style images
-    content_image = plt.imread(content_image)
-    style_image = plt.imread(style_image)
+
+    content_image = cv2.imread(content_image)
+    style_image = cv2.imread(style_image)
 
     print("Resizing and Normalizing images...")
     # Convert to float32 numpy array, add batch dimension, and normalize to range [0, 1]. Example using numpy:
@@ -52,6 +53,7 @@ def transfer_style(content_image, style_image, model_path):
     # 4차원을 3차원으로 바꿔줬음
     # print(content_image.shape, '###########')
     style_image = style_image.astype(np.float32)[np.newaxis, ...] / 255.
+    style_image = tf.convert_to_tensor(style_image[:,:,:,:3])
 
     # Optionally resize the images. It is recommended that the style image is about
     # 256 pixels (this size was used when training the style transfer network).
