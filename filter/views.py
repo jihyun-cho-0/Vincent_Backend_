@@ -15,6 +15,7 @@ class FilterView(ListAPIView):
     serializer_class = FilterallSerializer
     queryset = FilterImage.objects.all().order_by('-created_at')
 
+
     def get(self, request):
         sorting_val = self.request.GET.get('sort')
         # get 파라미터 내용중 sort 문자열의 내용을 가져옴
@@ -31,6 +32,7 @@ class FilterView(ListAPIView):
         
         pages = self.paginate_queryset(self.get_queryset())
         # pages 라는 변수에 get_queryset을 이용하여 queryset을 가져오고 pagination에 넣어줌
+        # 안씀
         slz = self.get_serializer(pages, many=True)
         return self.get_paginated_response(slz.data)
     

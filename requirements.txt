@@ -13,6 +13,7 @@ defusedxml==0.7.1
 dj-rest-auth==2.2.5
 Django==4.1.3
 django-allauth==0.51.0
+django-cors-headers==3.13.0
 django-dotenv==1.4.2
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.2.2
@@ -60,7 +61,7 @@ tensorflow-estimator==2.7.0
 tensorflow-hub==0.12.0
 tensorflow-io-gcs-filesystem==0.27.0
 termcolor==2.1.0
-typing-extensions==4.4.0
+typing_extensions==4.4.0
 tzdata==2022.6
 urllib3==1.26.12
 Werkzeug==2.2.2

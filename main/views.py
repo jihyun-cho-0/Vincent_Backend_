@@ -11,17 +11,21 @@ from rest_framework.response import Response
 from filter.models import FilterImage
 from rest_framework import status
 from django.db.models import Count
+from users.models import User
 
+#temp
 
-# Create your views here.
 class MainView(ListAPIView):
     pagination_class = post_page
     serializer_class = PostListSerializer
+   
     queryset = Post.objects.all().order_by('-created_at')
     # 초기는 최신순 정렬
     # queryset = Post.objects.annotate(count=Count('likes')).order_by('-count')
 
+
     def get(self, request):
+
         sorting_val = self.request.GET.get('sort')
         # get 파라미터 내용중 sort 문자열의 내용을 가져옴
         if sorting_val == 'recreate':
@@ -32,6 +36,7 @@ class MainView(ListAPIView):
             # 좋아요 순으로 정렬
         
         pages = self.paginate_queryset(self.get_queryset())
+      
         # pages 라는 변수에 get_queryset을 이용하여 queryset을 가져오고 pagination에 넣어줌
         # pagination이 실행될때 필요한 구문, 하지만 안 씀
 
@@ -41,7 +46,9 @@ class MainView(ListAPIView):
 class ConvertImageView(APIView):
 
     def post(self, request):
+   
         slz = TempImageSerializer(data=request.data)
+    
         if slz.is_valid():
             slz.save()
             if slz.data['user_filter']:

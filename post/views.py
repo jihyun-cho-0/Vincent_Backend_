@@ -5,6 +5,7 @@ from post.serializer import PostCreateSerializer, CommentSerializer, CommentCrea
 from post.models import Post
 from rest_framework.generics import get_object_or_404
 
+
 class ArticlesView(APIView):
     def get(self, request):
         post = Post.objects.all()
@@ -12,6 +13,7 @@ class ArticlesView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request, format=None):
+
         serializer = PostCreateSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(user=request.user)
