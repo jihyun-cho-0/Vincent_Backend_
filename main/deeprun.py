@@ -26,6 +26,7 @@ def transfer_style(content_image, style_image, model_path):
     import numpy as np
     import tensorflow as tf
     import tensorflow_hub as hub
+    import cv2
 
     """
     :param content_image: path of the content image
@@ -41,9 +42,9 @@ def transfer_style(content_image, style_image, model_path):
     """
 
     print("Loading images...")
-    # Load content and style images
-    content_image = plt.imread(content_image)
-    style_image = plt.imread(style_image)
+
+    content_image = cv2.imread(content_image)
+    style_image = cv2.imread(style_image)
 
     print("Resizing and Normalizing images...")
     # Convert to float32 numpy array, add batch dimension, and normalize to range [0, 1]. Example using numpy:
