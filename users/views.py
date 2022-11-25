@@ -20,7 +20,8 @@ from dj_rest_auth.registration.views import SocialLoginView
 from json import JSONDecodeError
 from allauth.socialaccount.providers.github import views as github_view
 from users.serializers import CustomTokenObtainPairSerializer, UserSerializer, UserProfileSerializer, UserProfileEditSerializer
-
+from post.serializer import PostSerializer
+from post.models import Post
 
 
 class UserView(APIView):
@@ -45,6 +46,7 @@ class mockView(APIView):
         user.save()
         return Response("get 요청")
 
+
 class FollowView(APIView):
     def post(self, request, user_id):
         you = get_object_or_404(User, id=user_id)
@@ -57,9 +59,8 @@ class FollowView(APIView):
             return Response("좋아요 취소 했습니다.", status=status.HTTP_200_OK)
 
 
-
-class ProfileView(APIView):  # 프로필 화면 뷰
-    def get(self, request, username):
+class ProfileView(APIView): # 프로필 화면 뷰
+    def get(self, request, username):  
         user = get_object_or_404(User, username=username)
         serializer = UserProfileSerializer(user)
         return Response(serializer.data)

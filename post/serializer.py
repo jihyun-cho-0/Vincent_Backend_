@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from post.models import Post, Comment
-from users.models import User
 from filter.models import FilterImage
 from filter.serializer import FilternameSerializer
 
