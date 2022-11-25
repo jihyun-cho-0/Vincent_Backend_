@@ -57,3 +57,10 @@ class ConvertImageView(APIView):
             return Response(slz.data, status=status.HTTP_400_BAD_REQUEST)
 
         return Response(slz.data['temp_image'], status=status.HTTP_200_OK)
+
+class Temp_Image_Del_View(APIView):
+    
+    def delete(self, request, temp_id):
+        test = get_object_or_404(TempImage, id=temp_id)
+        test.delete()
+        return Response("삭제되었습니다!")
