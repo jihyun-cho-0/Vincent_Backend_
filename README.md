@@ -38,6 +38,8 @@
 
 **개발환경** `djangorestframework 3.14.0`
 
+**프론트엔드 Gti Hub** https://github.com/Carrotww/Vincent_Frontend
+
 ## 주요 서비스 흐름도
 
 1. 회원가입
