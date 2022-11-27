@@ -19,7 +19,7 @@ from allauth.socialaccount.providers.google import views as google_view
 from dj_rest_auth.registration.views import SocialLoginView
 from json import JSONDecodeError
 from allauth.socialaccount.providers.github import views as github_view
-from users.serializers import CustomTokenObtainPairSerializer, UserSerializer, UserProfileSerializer, UserProfileEditSerializer
+from users.serializers import CustomTokenObtainPairSerializer, UserSerializer, UserProfileSerializer
 from post.serializer import PostSerializer
 from post.models import Post
 

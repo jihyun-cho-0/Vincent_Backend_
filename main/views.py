@@ -46,9 +46,8 @@ class MainView(ListAPIView):
 class ConvertImageView(APIView):
 
     def post(self, request):
-   
+        print(request.data)
         slz = TempImageSerializer(data=request.data)
-    
         if slz.is_valid():
             slz.save()
             if slz.data['user_filter']:
