@@ -1,4 +1,5 @@
 # 이미지 변환 서비스
+**프론트엔드 Gti Hub** https://github.com/Carrotww/Vincent_Frontend
 
 ## 팀 소개
 
@@ -37,8 +38,6 @@
 **데이터베이스** `SQLite3`
 
 **개발환경** `djangorestframework 3.14.0`
-
-**프론트엔드 Gti Hub** https://github.com/Carrotww/Vincent_Frontend
 
 ## 주요 서비스 흐름도
 
@@ -87,4 +86,4 @@
     
 ## 시연영상
 
-
+https://vimeo.com/775485950
