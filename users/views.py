@@ -148,7 +148,7 @@ class GoogleLogin(SocialLoginView):
 BASE_URL = 'http://localhost:8000/'
 GITHUB_CALLBACK_URI = BASE_URL + 'users/github/callback/'
 def github_login(request):
-    client_id = os.environ.get('SOCIAL_AUTH_GITHUB_KEY')
+    client_id = os.environ.get('SOCIAL_AUTH_GITHUB_CLIENT_ID')
     return redirect(
         f"https://github.com/login/oauth/authorize?client_id={client_id}&redirect_uri={GITHUB_CALLBACK_URI}"
     )
@@ -156,6 +156,8 @@ def github_callback(request):
     client_id = os.environ.get('SOCIAL_AUTH_GITHUB_CLIENT_ID')
     client_secret = os.environ.get('SOCIAL_AUTH_GITHUB_SECRET')
     code = request.GET.get('code')
+    print(code)
+    # print (str(code))
     """
     Access Token Request
     """
@@ -172,6 +174,7 @@ def github_callback(request):
     user_req = requests.get(f"https://api.github.com/user",
                             headers={"Authorization": f"Bearer {access_token}"})
     user_json = user_req.json()
+    # print(user_json, "######")
     error = user_json.get("error")
     if error is not None:
         raise JSONDecodeError(error)
@@ -198,7 +201,8 @@ def github_callback(request):
             return JsonResponse({'err_msg': 'failed to signin'}, status=accept_status)
         accept_json = accept.json()
         accept_json.pop('user', None)
-        return JsonResponse(accept_json)
+        return Response(accept_json)
+
     except User.DoesNotExist:
         # 기존에 가입된 유저가 없으면 새로 가입
         data = {'access_token': access_token, 'code': code}
@@ -211,6 +215,7 @@ def github_callback(request):
         accept_json = accept.json()
         accept_json.pop('user', None)
         return JsonResponse(accept_json)
+    
 class GithubLogin(SocialLoginView):
 
     adapter_class = github_view.GitHubOAuth2Adapter
