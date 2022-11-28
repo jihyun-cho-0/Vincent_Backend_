@@ -1,3 +1,4 @@
 from django.contrib import admin
+from filter.models import FilterImage
 
-# Register your models here.
+admin.site.register(FilterImage)

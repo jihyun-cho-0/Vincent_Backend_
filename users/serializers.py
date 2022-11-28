@@ -1,23 +1,17 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-from users.models import User
-# from posts.serializers import PostListSerializer
+from .models import User
+from post.serializer import PostListSerializer
 
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
-    followers = serializers.StringRelatedField(many=True)
-    followings = serializers.StringRelatedField(many=True)
-
-    # post_user = PostListSerializer(many=True)
-    # post_likes = PostListSerializer(many=True)
-
+    post_user = PostListSerializer(many=True)
     class Meta:
         model = User
-        fields = ("id","followings", "followers", "post_user", "post_likes")
-
-
+        fields = ("username", "email", "profile_image", "is_active", "followings","post_user") 
+    
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -37,7 +31,6 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         return user
-
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
