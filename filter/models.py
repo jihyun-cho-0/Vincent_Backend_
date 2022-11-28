@@ -1,11 +1,12 @@
 from django.db import models
 from users.models import User
+from filter.utils import rename_imagefile_to_uuid
 
 
 class FilterImage(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='filter_user')
     filter_name = models.CharField(max_length=25)
-    filter_image = models.ImageField(blank=False, upload_to='filter')
+    filter_image = models.ImageField(blank=False, upload_to='rename_imagefile_to_uuid')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     likes = models.ManyToManyField(User, related_name="filter_likes", blank=True)
