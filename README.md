@@ -1,5 +1,5 @@
 # 이미지 변환 서비스
-**프론트엔드 Gti Hub** https://github.com/Carrotww/Vincent_Frontend
+**프론트엔드 Gti Hub** 
 
 ## 팀 소개
 
