@@ -4,16 +4,16 @@ from rest_framework.response import Response
 from post.serializer import PostCreateSerializer, CommentSerializer, CommentCreateSerializer, PostListSerializer
 from post.models import Post
 from rest_framework.generics import get_object_or_404
+from rest_framework.permissions import IsAuthenticated
+from post.permissions import IsAuthorOrReadonly 
 
-
-class ArticlesView(APIView):
+class PostView(APIView):
     def get(self, request):
         post = Post.objects.all()
         serializer = PostListSerializer(post, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request, format=None):
-
         serializer = PostCreateSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(user=request.user)
@@ -21,7 +21,8 @@ class ArticlesView(APIView):
         else:
             return Response(serializer.errors)
 
-class ArticleDetailView(APIView):
+class PostDetailView(APIView):
+    permission_classes = [IsAuthenticated, IsAuthorOrReadonly]
     def get(self, request, post_id):
         post = get_object_or_404(Post, id=post_id)
         serializer = PostListSerializer(post)
