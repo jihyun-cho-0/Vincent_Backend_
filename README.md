@@ -69,16 +69,16 @@
 - 메인(게시글 목록 페이지)에서 이미지 클릭 시 해당 게시글 상세보기
 - 메인(게시글 목록 페이지)에서 최신순, 좋아요 순으로 게시글 정렬 가능
 ## Wireframe
-![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/a92d2388-2bfe-4d86-bbfe-d7dc6e945eeb/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221127%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221127T134959Z&X-Amz-Expires=86400&X-Amz-Signature=ed6970d380e943125f23b8a787efc6eafce50952d4cde1cd0b6cfbc38711798c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject)
+![](https://velog.velcdn.com/images/def3ff/post/2487ad9b-2e0e-49a1-88d3-c6b02349d74e/image.png)
 
 
     
 ## API
-![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/fb437c1c-1560-4187-89ed-a77f0d291fb5/www.notion.so_b80d36a514ff4702ace51b43ce0903ca_v6672750d03804c9fb3dc825ee595a700_%EB%B3%B5%EC%82%AC.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221127%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221127T140736Z&X-Amz-Expires=86400&X-Amz-Signature=80649a9848a3a088ec1b4235d6fc6c5e60b423aa5eeb4722a44977d3fafc74ed&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22www.notion.so_b80d36a514ff4702ace51b43ce0903ca_v%253D6672750d03804c9fb3dc825ee595a700%2520%25EB%25B3%25B5%25EC%2582%25AC.png%22&x-id=GetObject)
+![](https://velog.velcdn.com/images/def3ff/post/4542ad47-7b7a-44fe-9be3-bb75722bb446/image.png)
 
 
 ## ERD
-![image](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/42ef692a-3d31-40f2-9d6d-7be466102398/A6.LOL___%EC%9C%A0%ED%99%94%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221127%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221127T134640Z&X-Amz-Expires=86400&X-Amz-Signature=df4098ff11590ef19c63758a131411c99ed5ba2064fa91396d41eb1702d086cc&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22A6.LOL%2520_%2520%25EC%259C%25A0%25ED%2599%2594%25ED%2594%2584%25EB%25A1%259C%25EC%25A0%259D%25ED%258A%25B8.png%22&x-id=GetObject)
+![](https://velog.velcdn.com/images/def3ff/post/f318eb54-8a9a-4680-be05-2fa8dbb9a55b/image.png)
     
 
 
